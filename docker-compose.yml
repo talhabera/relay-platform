@@ -1,0 +1,90 @@
+services:
+  migrate:
+    build:
+      context: .
+      dockerfile: packages/worker/Dockerfile
+    image: registry.example.com/relay-worker:${IMAGE_TAG:?set IMAGE_TAG - latest for prod, preprod for preprod}
+    restart: "no"
+    command: ["pnpm", "--filter", "@relay/db", "migrate"]
+    networks: [coolify]
+    environment:
+      TZ: UTC
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL}
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    image: registry.example.com/relay-web:${IMAGE_TAG:?set IMAGE_TAG - latest for prod, preprod for preprod}
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      worker:
+        condition: service_healthy
+    networks: [coolify]
+    ports:
+      - "3102:3000"
+    environment:
+      TZ: UTC
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL}
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_URL: ${AUTH_URL:-http://localhost:3102}
+      NEXAUTH_ISSUER: ${NEXAUTH_ISSUER:-}
+      NEXAUTH_CLIENT_ID: ${NEXAUTH_CLIENT_ID:-}
+      NEXAUTH_CLIENT_SECRET: ${NEXAUTH_CLIENT_SECRET:-}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3102}
+      WORKER_URL: http://worker:3001
+      WORKER_SECRET: ${WORKER_SECRET}
+      CRON_URL: ${CRON_URL:-http://cron:3011}
+
+  worker:
+    build:
+      context: .
+      dockerfile: packages/worker/Dockerfile
+    image: registry.example.com/relay-worker:${IMAGE_TAG:?set IMAGE_TAG - latest for prod, preprod for preprod}
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    networks: [coolify]
+    environment:
+      TZ: UTC
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      WORKER_SECRET: ${WORKER_SECRET}
+      WORKER_PORT: "3001"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3001/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  cron:
+    build:
+      context: .
+      dockerfile: packages/worker/Dockerfile
+    image: registry.example.com/relay-worker:${IMAGE_TAG:?set IMAGE_TAG - latest for prod, preprod for preprod}
+    restart: unless-stopped
+    command: ["pnpm", "--filter", "@relay/worker", "start:cron"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    networks: [coolify]
+    environment:
+      TZ: UTC
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      WORKER_SECRET: ${WORKER_SECRET}
+      CRON_PORT: "3011"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3011/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+networks:
+  coolify:
+    external: true

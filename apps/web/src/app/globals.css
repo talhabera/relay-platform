@@ -1,0 +1,458 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Relay design tokens. Source of truth: Figma G3uunGxdgAN0Io3bZeyriQ page 01,
+ * exported to docs/design/tokens.json (see docs/design/tokens.md).
+ * src/app/globals.tokens.test.ts keeps this file in parity with tokens.json.
+ * Dark is the default theme (layout.tsx); :root holds light, .dark overrides.
+ */
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Radius (Figma values, not derived from --radius) */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 999px;
+
+  /* Effects: elevation, glow, focus (colors follow the theme) */
+  --shadow-elevation-1: 0px 1px 2px 0px var(--shadow), 0px 4px 12px 0px var(--shadow);
+  --shadow-elevation-2: 0px 2px 6px 0px var(--shadow), 0px 12px 32px 0px var(--shadow-strong);
+  --shadow-elevation-3: 0px 4px 12px 0px var(--shadow), 0px 24px 64px 0px var(--shadow-strong);
+  --shadow-glow-primary: 0px 0px 6px 0px var(--primary-glow), 0px 0px 24px 2px var(--primary-glow);
+  --shadow-focus-ring: 0px 0px 0px 3px var(--primary-glow);
+
+  /* Semantic colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-surface-raised: var(--surface-raised);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-status-pending: var(--status-pending);
+  --color-status-pending-foreground: var(--status-pending-foreground);
+  --color-status-approved: var(--status-approved);
+  --color-status-approved-foreground: var(--status-approved-foreground);
+  --color-status-rejected: var(--status-rejected);
+  --color-status-rejected-foreground: var(--status-rejected-foreground);
+  --color-status-stale: var(--status-stale);
+  --color-status-stale-foreground: var(--status-stale-foreground);
+  --color-status-live: var(--status-live);
+  --color-status-live-foreground: var(--status-live-foreground);
+  --color-status-draft: var(--status-draft);
+  --color-status-draft-foreground: var(--status-draft-foreground);
+  --color-canvas: var(--canvas);
+  --color-canvas-dot: var(--canvas-dot);
+  --color-border-strong: var(--border-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-foreground: var(--primary-soft-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-nav: var(--nav);
+  --color-nav-active: var(--nav-active);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-status-needs-you: var(--status-needs-you);
+  --color-status-needs-you-foreground: var(--status-needs-you-foreground);
+  --color-overlay: var(--overlay);
+  --color-diff-insert: var(--diff-insert);
+  --color-diff-insert-foreground: var(--diff-insert-foreground);
+  --color-diff-delete: var(--diff-delete);
+  --color-diff-delete-foreground: var(--diff-delete-foreground);
+
+  /* Brand glyph colors */
+  --color-brand-whatsapp: var(--brand-whatsapp);
+  --color-brand-instagram: var(--brand-instagram);
+  --color-brand-messenger: var(--brand-messenger);
+  --color-brand-telegram: var(--brand-telegram);
+  --color-brand-google: var(--brand-google);
+  --color-brand-trustpilot: var(--brand-trustpilot);
+  --color-brand-linkedin: var(--brand-linkedin);
+  --color-brand-facebook: var(--brand-facebook);
+  --color-brand-shopify: var(--brand-shopify);
+  --color-brand-slack: var(--brand-slack);
+  --color-brand-zendesk: var(--brand-zendesk);
+  --color-brand-hunter: var(--brand-hunter);
+}
+
+:root {
+  color-scheme: light;
+  --radius: 10px;
+
+  /* Primitives (docs/design/tokens.json). Do not use directly in components. */
+  --slate-50: #f7f8fa;
+  --slate-100: #eef0f4;
+  --slate-200: #dde1e8;
+  --slate-300: #c4cad5;
+  --slate-400: #94a0b2;
+  --slate-500: #667689;
+  --slate-600: #4a5769;
+  --slate-700: #364252;
+  --slate-800: #232c39;
+  --slate-900: #151b25;
+  --slate-950: #0b0f16;
+  --teal-100: #d6f3ec;
+  --teal-300: #6fd1bf;
+  --teal-400: #2dd4bf;
+  --teal-500: #1a9e85;
+  --teal-600: #147f6b;
+  --teal-800: #0f5a4d;
+  --teal-950: #0b2a24;
+  --amber-100: #fbf0d9;
+  --amber-300: #f2c46a;
+  --amber-400: #e8ac3f;
+  --amber-500: #d9931a;
+  --amber-800: #7a5210;
+  --amber-950: #3a2a0a;
+  --green-100: #dff3e6;
+  --green-300: #86d3a3;
+  --green-400: #4fbb7c;
+  --green-500: #2f9e5f;
+  --green-800: #1d6b3f;
+  --green-950: #0d2a1a;
+  --red-100: #fbe1e1;
+  --red-300: #f08a8a;
+  --red-400: #e05a5a;
+  --red-500: #d13c3c;
+  --red-800: #8f2424;
+  --red-950: #3a0f0f;
+  --blue-100: #e1ecfb;
+  --blue-300: #8fb4f0;
+  --blue-400: #5f97e8;
+  --blue-500: #3b7ddd;
+  --blue-800: #234f96;
+  --blue-950: #0e1f3a;
+  --ink-50: #eef3f4;
+  --ink-200: #cfd8da;
+  --ink-400: #8a9a9e;
+  --ink-600: #34454a;
+  --ink-700: #243135;
+  --ink-800: #1a2427;
+  --ink-850: #121a1d;
+  --ink-900: #0d1316;
+  --ink-950: #080c0e;
+  --brand-whatsapp: #25d366;
+  --brand-instagram: #e1306c;
+  --brand-messenger: #0084ff;
+  --brand-telegram: #229ed9;
+  --brand-google: #4285f4;
+  --brand-trustpilot: #00b67a;
+  --brand-linkedin: #0a66c2;
+  --brand-facebook: #1877f2;
+  --brand-shopify: #95bf47;
+  --brand-slack: #4a154b;
+  --brand-zendesk: #03363d;
+  --brand-hunter: #ff5722;
+  --alpha-teal400-12: #2dd4bf1f;
+  --alpha-teal400-40: #2dd4bf66;
+  --alpha-teal600-10: #147f6b1a;
+  --alpha-teal500-30: #1a9e854d;
+  --alpha-ink950-72: #080c0eb8;
+  --alpha-slate950-40: #0b0f1666;
+  --alpha-black-40: #00000066;
+  --alpha-black-64: #000000a3;
+  --alpha-slate950-08: #0b0f1614;
+  --alpha-slate950-16: #0b0f1629;
+  --white: #ffffff;
+
+  /* Semantic, light */
+  --background: var(--white);
+  --foreground: var(--slate-900);
+  --card: var(--white);
+  --card-foreground: var(--slate-900);
+  --surface-raised: var(--slate-50);
+  --popover: var(--white);
+  --popover-foreground: var(--slate-900);
+  --primary: var(--teal-600);
+  --primary-foreground: var(--white);
+  --secondary: var(--slate-100);
+  --secondary-foreground: var(--slate-800);
+  --muted: var(--slate-100);
+  --muted-foreground: var(--slate-600);
+  --accent: var(--slate-100);
+  --accent-foreground: var(--slate-900);
+  --destructive: var(--red-500);
+  --border: var(--slate-200);
+  --input: var(--slate-200);
+  --ring: var(--teal-500);
+  --chart-1: var(--teal-500);
+  --chart-2: var(--blue-500);
+  --chart-3: var(--amber-500);
+  --chart-4: var(--green-500);
+  --chart-5: var(--red-500);
+  --sidebar: var(--slate-50);
+  --sidebar-foreground: var(--slate-800);
+  --sidebar-primary: var(--teal-600);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: var(--slate-200);
+  --sidebar-accent-foreground: var(--slate-900);
+  --sidebar-border: var(--slate-200);
+  --sidebar-ring: var(--teal-500);
+  --status-pending: var(--amber-100);
+  --status-pending-foreground: var(--amber-800);
+  --status-approved: var(--green-100);
+  --status-approved-foreground: var(--green-800);
+  --status-rejected: var(--red-100);
+  --status-rejected-foreground: var(--red-800);
+  --status-stale: var(--slate-100);
+  --status-stale-foreground: var(--slate-600);
+  --status-live: var(--green-100);
+  --status-live-foreground: var(--green-800);
+  --status-draft: var(--blue-100);
+  --status-draft-foreground: var(--blue-800);
+  --canvas: var(--slate-50);
+  --canvas-dot: var(--slate-300);
+  --border-strong: var(--slate-300);
+  --primary-soft: var(--alpha-teal600-10);
+  --primary-soft-foreground: var(--teal-800);
+  --primary-glow: var(--alpha-teal500-30);
+  --nav: var(--slate-50);
+  --nav-active: var(--white);
+  --warning: var(--amber-800);
+  --warning-foreground: var(--white);
+  --success: var(--green-800);
+  --success-foreground: var(--white);
+  --destructive-foreground: var(--white);
+  --status-needs-you: var(--amber-100);
+  --status-needs-you-foreground: var(--amber-800);
+  --overlay: var(--alpha-slate950-40);
+  --diff-insert: var(--green-100);
+  --diff-insert-foreground: var(--green-800);
+  --diff-delete: var(--red-100);
+  --diff-delete-foreground: var(--red-800);
+  --shadow: var(--alpha-slate950-08);
+  --shadow-strong: var(--alpha-slate950-16);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: var(--ink-950);
+  --foreground: var(--ink-50);
+  --card: var(--ink-900);
+  --card-foreground: var(--ink-50);
+  --surface-raised: var(--ink-850);
+  --popover: var(--ink-900);
+  --popover-foreground: var(--ink-50);
+  --primary: var(--teal-400);
+  --primary-foreground: var(--ink-950);
+  --secondary: var(--ink-800);
+  --secondary-foreground: var(--ink-50);
+  --muted: var(--ink-800);
+  --muted-foreground: var(--ink-400);
+  --accent: var(--ink-800);
+  --accent-foreground: var(--ink-50);
+  --destructive: var(--red-400);
+  --border: var(--ink-800);
+  --input: var(--ink-800);
+  --ring: var(--teal-400);
+  --chart-1: var(--teal-400);
+  --chart-2: var(--blue-300);
+  --chart-3: var(--amber-300);
+  --chart-4: var(--green-300);
+  --chart-5: var(--red-300);
+  --sidebar: var(--ink-900);
+  --sidebar-foreground: var(--ink-200);
+  --sidebar-primary: var(--teal-400);
+  --sidebar-primary-foreground: var(--ink-950);
+  --sidebar-accent: var(--ink-800);
+  --sidebar-accent-foreground: var(--ink-50);
+  --sidebar-border: var(--ink-800);
+  --sidebar-ring: var(--teal-400);
+  --status-pending: var(--amber-950);
+  --status-pending-foreground: var(--amber-300);
+  --status-approved: var(--green-950);
+  --status-approved-foreground: var(--green-300);
+  --status-rejected: var(--red-950);
+  --status-rejected-foreground: var(--red-300);
+  --status-stale: var(--ink-800);
+  --status-stale-foreground: var(--ink-200);
+  --status-live: var(--green-950);
+  --status-live-foreground: var(--green-300);
+  --status-draft: var(--blue-950);
+  --status-draft-foreground: var(--blue-300);
+  --canvas: var(--ink-950);
+  --canvas-dot: var(--ink-700);
+  --border-strong: var(--ink-600);
+  --primary-soft: var(--alpha-teal400-12);
+  --primary-soft-foreground: var(--teal-400);
+  --primary-glow: var(--alpha-teal400-40);
+  --nav: var(--ink-900);
+  --nav-active: var(--ink-800);
+  --warning: var(--amber-400);
+  --warning-foreground: var(--ink-950);
+  --success: var(--green-400);
+  --success-foreground: var(--ink-950);
+  --destructive-foreground: var(--ink-950);
+  --status-needs-you: var(--amber-950);
+  --status-needs-you-foreground: var(--amber-300);
+  --overlay: var(--alpha-ink950-72);
+  --diff-insert: var(--green-950);
+  --diff-insert-foreground: var(--green-300);
+  --diff-delete: var(--red-950);
+  --diff-delete-foreground: var(--red-300);
+  --shadow: var(--alpha-black-40);
+  --shadow-strong: var(--alpha-black-64);
+}
+
+/* Type scale (Figma type/*). Named type-* so tailwind-merge never treats them as text colors. */
+@utility type-display-xl {
+  font-family: var(--font-sans);
+  font-size: 56px;
+  line-height: 60px;
+  font-weight: 600;
+}
+
+@utility type-display {
+  font-family: var(--font-sans);
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 600;
+}
+
+@utility type-metric {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 600;
+}
+
+@utility type-h1 {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 600;
+}
+
+@utility type-h2 {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+@utility type-h3 {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+@utility type-body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+@utility type-body-strong {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+@utility type-small {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+@utility type-caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+@utility type-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@utility type-mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground type-body antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes logo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 30s linear infinite;
+}
+
+.animate-logo-scroll:hover {
+  animation-play-state: paused;
+}

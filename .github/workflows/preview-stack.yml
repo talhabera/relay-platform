@@ -1,0 +1,32 @@
+name: Preview stack
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: preview-stack
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  stack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PREVIEW_STACK_TOKEN != '' && secrets.PREVIEW_STACK_TOKEN || github.token }}
+
+      - name: Stack open PRs onto preview
+        env:
+          GH_TOKEN: ${{ secrets.PREVIEW_STACK_TOKEN != '' && secrets.PREVIEW_STACK_TOKEN || github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: bash .github/scripts/preview-stack.sh

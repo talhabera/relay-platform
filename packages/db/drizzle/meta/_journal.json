@@ -1,0 +1,398 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1770517598435,
+      "tag": "0000_petite_blur",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1770526368037,
+      "tag": "0001_last_wallflower",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1771095209643,
+      "tag": "0002_flawless_praxagora",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1772140000000,
+      "tag": "0003_drop_better_auth",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1772260000000,
+      "tag": "0004_agent_instructions",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1772340000000,
+      "tag": "0005_operator_agents",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1772400000000,
+      "tag": "0006_panel_chat",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1772420000000,
+      "tag": "0007_operator_cron",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1772500000000,
+      "tag": "0008_revenue_package",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1772580000000,
+      "tag": "0009_page_permissions",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1772670000000,
+      "tag": "0009_chat_archived_at",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1772750000000,
+      "tag": "0010_operator_research_queue",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1772760000000,
+      "tag": "0011_drop_named_http",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1772840000000,
+      "tag": "0012_instagram_comments",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1788824242662,
+      "tag": "0014_inbound_webhook_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1788910000000,
+      "tag": "0015_instagram_comment_reply_text",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1789000000000,
+      "tag": "0016_channel_routing_keys",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1789100000000,
+      "tag": "0017_redelivery_index_predicate",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1789200000000,
+      "tag": "0018_rate_limits",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1789300000000,
+      "tag": "0019_company_rate_limits",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1789400000000,
+      "tag": "0020_leads",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1790980904939,
+      "tag": "0021_human_handoff",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1790980950828,
+      "tag": "0022_checkpoints",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1790981503272,
+      "tag": "0023_retire_chat_page_permission",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1790981503900,
+      "tag": "0024_chat_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1790983906866,
+      "tag": "0025_company_member_role",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1790984431393,
+      "tag": "0026_workflows",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1790984460641,
+      "tag": "0027_agent_users",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1790987738737,
+      "tag": "0028_lead_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1790988345131,
+      "tag": "0029_portal_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1790989154689,
+      "tag": "0030_w2_concurrency_guards",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1790990484684,
+      "tag": "0031_agent_questions",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1790991797100,
+      "tag": "0032_lead_scoring",
+      "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1790993000000,
+      "tag": "0033_lead_capture",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1791000000000,
+      "tag": "0034_checkpoint_send_receipt",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1791000100000,
+      "tag": "0035_handoff_team_chat",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1791010000000,
+      "tag": "0036_handoff_notification_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1791010000001,
+      "tag": "0037_company_home_tiles",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1791040831079,
+      "tag": "0038_connector_catalog",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1791040831080,
+      "tag": "0039_report_snapshots",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1791040831081,
+      "tag": "0040_access_requests",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1791043554814,
+      "tag": "0041_packages",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1791043554815,
+      "tag": "0042_agent_version_change_note",
+      "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1791043554816,
+      "tag": "0043_client_profile_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 44,
+      "version": "7",
+      "when": 1791043554818,
+      "tag": "0044_report_email_deliveries",
+      "breakpoints": true
+    },
+    {
+      "idx": 45,
+      "version": "7",
+      "when": 1791291911737,
+      "tag": "0045_push_subscriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "7",
+      "when": 1791291960998,
+      "tag": "0046_chat_enrichment",
+      "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1791292010000,
+      "tag": "0047_daily_briefs",
+      "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "7",
+      "when": 1791292060000,
+      "tag": "0048_home_tile_daily_brief",
+      "breakpoints": true
+    },
+    {
+      "idx": 49,
+      "version": "7",
+      "when": 1791292110000,
+      "tag": "0049_projects_tasks",
+      "breakpoints": true
+    },
+    {
+      "idx": 50,
+      "version": "7",
+      "when": 1791292160000,
+      "tag": "0050_home_tile_my_tasks",
+      "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1791292210000,
+      "tag": "0051_sales_statuses",
+      "breakpoints": true
+    },
+    {
+      "idx": 52,
+      "version": "7",
+      "when": 1791292260000,
+      "tag": "0052_ad_data",
+      "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "7",
+      "when": 1791292310000,
+      "tag": "0053_lead_event_metadata",
+      "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1791292360000,
+      "tag": "0054_home_tile_ad_report",
+      "breakpoints": true
+    },
+    {
+      "idx": 55,
+      "version": "7",
+      "when": 1791292410000,
+      "tag": "0055_ad_change_log",
+      "breakpoints": true
+    }
+  ]
+}

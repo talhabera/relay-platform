@@ -1,0 +1,30 @@
+name: Migration journal
+
+on:
+  pull_request:
+    paths:
+      - "packages/db/drizzle/**"
+      - "scripts/check-migration-journal*.ts"
+  push:
+    branches: [main, v2]
+    paths:
+      - "packages/db/drizzle/**"
+      - "scripts/check-migration-journal*.ts"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --filter @relay/db
+      - name: Fail on duplicate prefixes, out-of-order entries, orphan .sql files
+        run: pnpm --filter @relay/db exec tsx ../../scripts/check-migration-journal.ts

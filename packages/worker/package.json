@@ -1,0 +1,33 @@
+{
+  "name": "@relay/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/chat-main.ts",
+    "dev:cron": "tsx watch src/cron-main.ts",
+    "start": "tsx src/chat-main.ts",
+    "start:cron": "tsx src/cron-main.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.38",
+    "@relay/agent-ops": "workspace:*",
+    "@relay/db": "workspace:*",
+    "ai": "^6.0.77",
+    "cheerio": "^1.2.0",
+    "drizzle-orm": "^0.45.1",
+    "exceljs": "^4.4.0",
+    "postgres": "^3.4.8",
+    "tsx": "^4.21.0",
+    "turndown": "^7.2.2",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/turndown": "^5.0.6",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}
